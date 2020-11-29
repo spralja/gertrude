@@ -1,16 +1,29 @@
+/*
+    This is the KeyWords class, its stores all the keyword-answer matches in nested ArrayLists
+
+ */
+
 import java.util.ArrayList;
 import java.util.Random;
 
 public class KeyWords {
-    private Random random;
+    private Random random; //decalring a random object so we can randomize the answer in cases
+    //where a question has multiple possible answers
     private ArrayList<ArrayList <String> > keyWords;
     private ArrayList< ArrayList< String> > answers;
+    // a nested ArrayList with the questions and answers
+    // mateched questions-answers have the same index
 
-private static final ArrayList< String > NO_ANSWER = new ArrayList<String>();
+    private static final ArrayList< String > NO_ANSWER = new ArrayList<String>();
+    //this is a special list of answers which we return whenever we no keywords match the question
     public KeyWords() {
-        random = new Random();
-        keyWords = new ArrayList<ArrayList< String >>();
-        answers = new ArrayList< ArrayList< String > >();
+        random = new Random(); //initialation
+        keyWords = new ArrayList<ArrayList< String >>(); //initialation
+        answers = new ArrayList< ArrayList< String > >(); //initialation
+
+        //Here we initialise all the question-answer matches
+        //question keyWords start and end with a space so we do not pick up words like
+        // decentralisation for decent
 
         //if Gertrude cannot find a match
         NO_ANSWER.add("Sorry, I do not understand, could you elaborate?");
@@ -84,6 +97,7 @@ private static final ArrayList< String > NO_ANSWER = new ArrayList<String>();
         keyWords.add(new ArrayList<String>());
         keyWords.get(keyWords.size() - 1).add(" nothing ");
         keyWords.get(keyWords.size() - 1).add(" not much ");
+        keyWords.get(keyWords.size() - 1).add(" no ");
         answers.add(new ArrayList<String>());
         answers.get(answers.size() - 1).add("Okay.");
         answers.get(answers.size() - 1).add("Come on man give me something to work with here");
@@ -111,6 +125,9 @@ private static final ArrayList< String > NO_ANSWER = new ArrayList<String>();
         keyWords.get(keyWords.size() - 1).add(" i'm okay ");
         keyWords.get(keyWords.size() - 1).add(" im happy ");
         keyWords.get(keyWords.size() - 1).add(" i'm happy ");
+        keyWords.get(keyWords.size() - 1).add(" i'm fine ");
+        keyWords.get(keyWords.size() - 1).add(" i am fine ");
+        keyWords.get(keyWords.size() - 1).add(" im fine ");
         keyWords.get(keyWords.size() - 1).add(" i am feeling good ");
         keyWords.get(keyWords.size() - 1).add(" im feeling good ");
         keyWords.get(keyWords.size() - 1).add(" i'm feeling good ");
@@ -266,15 +283,18 @@ private static final ArrayList< String > NO_ANSWER = new ArrayList<String>();
     }
 
     public String match(String question) {
-        question = " " + question.toLowerCase() + " ";
+        question = " " + question.toLowerCase() + " ";//we add spaces at the start end and so if the
+        // the keywords are at the start or end they are separated by spaces
         for(int i = 0; i < keyWords.size(); ++i) {
-            for(int j = 0; j < keyWords.get(i).size(); ++j){
+            for(int j = 0; j < keyWords.get(i).size(); ++j){ //loop which goes through all the keywords
                 if(question.contains(keyWords.get(i).get(j))) {
                     return answers.get(i).get(random.nextInt(answers.get(i).size()));
+                    // generating a random answer
                 }
-            }
+            } //if the keyword is initialised earlier it has priority
         }
 
         return NO_ANSWER.get(random.nextInt(NO_ANSWER.size()));
+        //in case no keyWords are found
     }
 }
