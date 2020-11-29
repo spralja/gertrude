@@ -3,7 +3,7 @@ import java.util.Scanner;
 public class Gertrude {
     public Scanner in = new Scanner(System.in);
     public final int I = 20;
-    public Mathcer keyWords = new Mathcer();
+    public KeyWords keyWords = new KeyWords();
     public static void main(String[] args) {
         Gertrude gertrude = new Gertrude();
         gertrude.loop(args);
@@ -12,7 +12,7 @@ public class Gertrude {
     public void loop(String[] args) {
         initialisation();
         for(int i = 0; i < I; ++i) {
-           answerQuestion(inputQuestion());
+            answerQuestion(inputQuestion());
         }
     }
 
