@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 public class Gertrude {
     public Scanner in = new Scanner(System.in);
-    public final int I = 20;
+    public final int I = 25;
     public KeyWords keyWords = new KeyWords();
     public static void main(String[] args) {
         Gertrude gertrude = new Gertrude();
@@ -14,6 +14,8 @@ public class Gertrude {
         for(int i = 0; i < I; ++i) {
             answerQuestion(inputQuestion());
         }
+
+        System.out.println("Gertrude: Goodbye!");
     }
 
     public String inputQuestion() {
